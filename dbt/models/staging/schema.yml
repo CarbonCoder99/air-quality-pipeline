@@ -1,0 +1,63 @@
+version: 2
+
+models:
+
+  - name: stg_measurements
+    description: >
+      Cleaned and standardised air quality measurements.
+      One row per sensor per day. Invalid readings removed.
+      All columns cast to correct data types.
+
+    columns:
+
+      - name: sensor_id
+        description: Unique sensor identifier from OpenAQ
+        tests:
+          - not_null
+
+      - name: location_id
+        description: Unique monitoring station identifier
+        tests:
+          - not_null
+
+      - name: measurement_date
+        description: Calendar date of the measurement
+        tests:
+          - not_null
+
+      - name: country_iso
+        description: ISO country code
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['US','GB','DE','FR','IN','CN','JP',
+                       'BR','MX','ZA','NG','KE','AU','PK','ID']
+
+      - name: pollutant
+        description: Pollutant type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pm25', 'pm10', 'no2', 'o3', 'co', 'so2']
+
+      - name: measurement_value
+        description: Daily average measurement — must be non-negative
+        tests:
+          - not_null
+
+      - name: measured_at_utc
+        description: Full UTC timestamp of measurement
+        tests:
+          - not_null
+
+  - name: stg_locations
+    description: >
+      Deduplicated monitoring station reference data.
+      One row per location. Derived from measurements data.
+
+    columns:
+      - name: location_id
+        description: Unique station identifier
+        tests:
+          - unique
+          - not_null

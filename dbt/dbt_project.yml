@@ -1,0 +1,39 @@
+name: 'air_quality'
+version: '1.0.0'
+config-version: 2
+
+profile: 'air_quality'
+
+# Tell dbt where to find things
+model-paths:     ["models"]
+macro-paths:     ["macros"]
+seed-paths:      ["seeds"]
+test-paths:      ["tests"]
+analysis-paths:  ["analyses"]
+snapshot-paths:  ["snapshots"]
+
+# Where dbt writes compiled SQL and run artifacts
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+# Model configurations by folder
+# These are defaults — individual models can override them
+models:
+  air_quality:
+
+    staging:
+      # Views are free to store and always reflect latest logic
+      # Perfect for staging — lightweight, always up to date
+      +materialized: view
+      +schema: staging         # writes to air_quality_staging dataset
+
+    marts:
+      # Tables are materialised for query performance
+      # Analysts query marts heavily — we want speed
+      +materialized: table
+      +schema: mart            # writes to air_quality_mart dataset
+
+# Seed configurations
+seeds:
+  air_quality:
+    +schema: mart              # seeds go into the mart dataset

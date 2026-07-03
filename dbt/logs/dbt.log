@@ -1,0 +1,268 @@
+[0m09:36:41.936355 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282fe1135f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282fde8b980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282fe4f73b0>]}
+
+
+============================== 09:36:41.941628 | 1af1d0dd-46bd-4b10-b965-341befed3ca9 ==============================
+[0m09:36:41.941628 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:36:41.942122 [debug] [MainThread]: running dbt with arguments {'fail_fast': 'False', 'empty': 'None', 'introspect': 'True', 'use_colors': 'True', 'log_format': 'default', 'cache_selected_only': 'False', 'debug': 'False', 'quiet': 'False', 'invocation_command': 'dbt init air_quality', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'partial_parse': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'indirect_selection': 'eager', 'target_path': 'None', 'log_cache_events': 'False', 'warn_error': 'None', 'write_json': 'True', 'profiles_dir': '/home/waziri99/.dbt', 'version_check': 'True', 'log_path': 'logs', 'send_anonymous_usage_stats': 'True', 'printer_width': '80'}
+[0m09:36:41.962552 [info ] [MainThread]: Creating dbt configuration folder at /home/waziri99/.dbt
+[0m09:36:41.965901 [debug] [MainThread]: Starter project path: /home/waziri99/.venv/dbt-env/lib/python3.12/site-packages/dbt/include/starter_project
+[0m09:36:41.974551 [info ] [MainThread]: 
+Your new dbt project "air_quality" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m09:36:41.974942 [info ] [MainThread]: Setting up your profile.
+[0m09:39:16.136045 [info ] [MainThread]: Profile air_quality written to /home/waziri99/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m09:39:16.138457 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 139.92732, "process_in_blocks": "246000", "process_kernel_time": 0.597511, "process_mem_max_rss": "210620", "process_out_blocks": "80", "process_user_time": 2.045495}
+[0m09:39:16.140256 [debug] [MainThread]: Command `dbt init` succeeded at 09:39:16.140065 after 139.93 seconds
+[0m09:39:16.140822 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282fd9af920>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282fc3e1760>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7282e33a95e0>]}
+[0m09:39:16.141327 [debug] [MainThread]: Flushing usage events
+[0m09:39:17.293663 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:40:35.261304 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbdafdc70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbefd6300>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbf05ede0>]}
+
+
+============================== 09:40:35.265310 | 7a0bb95e-7471-4732-8ddb-fccd7b6a96fc ==============================
+[0m09:40:35.265310 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:40:35.265773 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'partial_parse': 'True', 'introspect': 'True', 'debug': 'False', 'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'no_print': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'invocation_command': 'dbt deps', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'log_format': 'default', 'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'warn_error': 'None', 'static_parser': 'True', 'empty': 'None', 'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'log_cache_events': 'False', 'use_colors': 'True', 'target_path': 'None', 'use_experimental_parser': 'False'}
+[0m09:40:35.399568 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '7a0bb95e-7471-4732-8ddb-fccd7b6a96fc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbdb3d6a0>]}
+[0m09:40:35.422718 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-fx6fjb35'
+[0m09:40:35.423254 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m09:40:36.012280 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m09:40:36.014887 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m09:40:36.229700 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m09:40:36.245917 [info ] [MainThread]: Updating lock file in file path: /home/waziri99/air-quality-pipeline/dbt/package-lock.yml
+[0m09:40:36.249281 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-ofb63u73'
+[0m09:40:36.251743 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m09:40:37.250531 [info ] [MainThread]: Installed from version 1.4.1
+[0m09:40:37.251064 [info ] [MainThread]: Up to date!
+[0m09:40:37.251630 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '7a0bb95e-7471-4732-8ddb-fccd7b6a96fc', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbd16a2d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbd1fa750>]}
+[0m09:40:37.253590 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 2.0374537, "process_in_blocks": "63544", "process_kernel_time": 0.371207, "process_mem_max_rss": "107176", "process_out_blocks": "2328", "process_user_time": 1.576486}
+[0m09:40:37.254147 [debug] [MainThread]: Command `dbt deps` succeeded at 09:40:37.254029 after 2.04 seconds
+[0m09:40:37.254512 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dc1b13260>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbd1fa750>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x751dbd16a2d0>]}
+[0m09:40:37.254941 [debug] [MainThread]: Flushing usage events
+[0m09:40:38.533635 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:44:31.335219 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff2c88f80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff31b9a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff2a3e840>]}
+
+
+============================== 09:44:31.340741 | 4334b047-fc43-44b9-8dd1-353713ce8d60 ==============================
+[0m09:44:31.340741 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:44:31.341216 [debug] [MainThread]: running dbt with arguments {'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'no_print': 'None', 'log_format': 'default', 'indirect_selection': 'eager', 'use_colors': 'True', 'fail_fast': 'False', 'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'introspect': 'True', 'invocation_command': 'dbt deps', 'target_path': 'None', 'empty': 'None', 'version_check': 'True', 'static_parser': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'write_json': 'True', 'debug': 'False', 'partial_parse': 'True', 'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt', 'log_cache_events': 'False', 'printer_width': '80', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'quiet': 'False'}
+[0m09:44:31.457405 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '4334b047-fc43-44b9-8dd1-353713ce8d60', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff1f691c0>]}
+[0m09:44:31.494477 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-0a2h7q9b'
+[0m09:44:31.494978 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m09:44:31.990278 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m09:44:31.992738 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m09:44:32.210358 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m09:44:32.219111 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m09:44:33.427106 [info ] [MainThread]: Installed from version 1.4.1
+[0m09:44:33.427544 [info ] [MainThread]: Up to date!
+[0m09:44:33.427934 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '4334b047-fc43-44b9-8dd1-353713ce8d60', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff1cf5e80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff1d8b410>]}
+[0m09:44:33.429908 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 2.1442227, "process_in_blocks": "72312", "process_kernel_time": 0.247565, "process_mem_max_rss": "107276", "process_out_blocks": "2312", "process_user_time": 1.503073}
+[0m09:44:33.430400 [debug] [MainThread]: Command `dbt deps` succeeded at 09:44:33.430294 after 2.14 seconds
+[0m09:44:33.430727 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff26fed80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff2a3e840>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b1ff3e89970>]}
+[0m09:44:33.431060 [debug] [MainThread]: Flushing usage events
+[0m09:44:34.605801 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:44:35.944549 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73296972dfa0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x732969ef1190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x732969a58500>]}
+
+
+============================== 09:44:35.946743 | 772e9e65-01d1-4e32-bb74-c95a013d63ea ==============================
+[0m09:44:35.946743 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:44:35.947240 [debug] [MainThread]: running dbt with arguments {'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'version_check': 'True', 'static_parser': 'True', 'partial_parse': 'True', 'no_print': 'None', 'quiet': 'False', 'invocation_command': 'dbt parse', 'use_colors': 'True', 'empty': 'None', 'introspect': 'True', 'printer_width': '80', 'warn_error': 'None', 'target_path': 'None', 'debug': 'False', 'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'send_anonymous_usage_stats': 'True', 'cache_selected_only': 'False', 'write_json': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'fail_fast': 'False'}
+[0m09:44:35.952673 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Env var required but not provided: 'GCP_PROJECT_ID'
+[0m09:44:35.953510 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": false, "command_wall_clock_time": 0.058679387, "process_in_blocks": "280", "process_kernel_time": 0.119795, "process_mem_max_rss": "102532", "process_out_blocks": "8", "process_user_time": 1.149152}
+[0m09:44:35.953932 [debug] [MainThread]: Command `dbt parse` failed at 09:44:35.953825 after 0.06 seconds
+[0m09:44:35.954235 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73296972dfa0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x732969522a20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x732968bc37d0>]}
+[0m09:44:35.954600 [debug] [MainThread]: Flushing usage events
+[0m09:44:36.911056 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:44:38.212100 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a7855d100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a7a3b76e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a77fcb2c0>]}
+
+
+============================== 09:44:38.214202 | 9e13193c-206b-4282-b2b0-e1963c9d96f5 ==============================
+[0m09:44:38.214202 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:44:38.214759 [debug] [MainThread]: running dbt with arguments {'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'partial_parse': 'True', 'printer_width': '80', 'send_anonymous_usage_stats': 'True', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_format': 'default', 'indirect_selection': 'eager', 'fail_fast': 'False', 'static_parser': 'True', 'cache_selected_only': 'False', 'version_check': 'True', 'use_experimental_parser': 'False', 'invocation_command': 'dbt ls', 'empty': 'None', 'warn_error': 'None', 'target_path': 'None', 'use_colors': 'True', 'log_cache_events': 'False', 'write_json': 'True', 'quiet': 'False', 'debug': 'False', 'introspect': 'True', 'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt'}
+[0m09:44:38.219951 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Env var required but not provided: 'GCP_PROJECT_ID'
+[0m09:44:38.220907 [debug] [MainThread]: Resource report: {"command_name": "list", "command_success": false, "command_wall_clock_time": 0.055167306, "process_in_blocks": "0", "process_kernel_time": 0.079679, "process_mem_max_rss": "102760", "process_out_blocks": "0", "process_user_time": 1.164208}
+[0m09:44:38.221323 [debug] [MainThread]: Command `dbt ls` failed at 09:44:38.221225 after 0.06 seconds
+[0m09:44:38.221608 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a77d18200>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a7855d100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c6a77667ef0>]}
+[0m09:44:38.221979 [debug] [MainThread]: Flushing usage events
+[0m09:44:39.213689 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:48:08.906737 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205e89aaba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205e85c1d30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205e83318e0>]}
+
+
+============================== 09:48:08.912115 | 54a71418-7e56-42b9-8285-35c969ab3d08 ==============================
+[0m09:48:08.912115 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:48:08.912684 [debug] [MainThread]: running dbt with arguments {'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'debug': 'False', 'use_colors': 'True', 'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt', 'warn_error': 'None', 'printer_width': '80', 'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'fail_fast': 'False', 'cache_selected_only': 'False', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'introspect': 'True', 'partial_parse': 'True', 'write_json': 'True', 'use_experimental_parser': 'False', 'invocation_command': 'dbt parse', 'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'empty': 'None'}
+[0m09:48:10.163977 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '54a71418-7e56-42b9-8285-35c969ab3d08', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205d0497f20>]}
+[0m09:48:10.214561 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '54a71418-7e56-42b9-8285-35c969ab3d08', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205d0665220>]}
+[0m09:48:10.215131 [info ] [MainThread]: Registered adapter: bigquery=1.11.3
+[0m09:48:10.316502 [debug] [MainThread]: checksum: 30a8cc8fdcbf66701b0944d4ccce3fa46dd04b61e5df68b9f16d57b2e0e3f0be, vars: {}, profile: , target: , version: 1.11.11
+[0m09:48:10.317180 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m09:48:10.317515 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '54a71418-7e56-42b9-8285-35c969ab3d08', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205d034a2a0>]}
+[0m09:48:11.693329 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `accepted_values` defined on
+'fct_daily_measurements' in package 'air_quality' (models/marts/schema.yml).
+Arguments to generic tests should be nested under the `arguments` property.
+[0m09:48:11.693825 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '54a71418-7e56-42b9-8285-35c969ab3d08', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205cbe0ae70>]}
+[0m09:48:11.925067 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '54a71418-7e56-42b9-8285-35c969ab3d08', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205cb549cd0>]}
+[0m09:48:11.928257 [info ] [MainThread]: Performance info: /home/waziri99/air-quality-pipeline/dbt/target/perf_info.json
+[0m09:48:12.097920 [debug] [MainThread]: Wrote artifact WritableManifest to /home/waziri99/air-quality-pipeline/dbt/target/manifest.json
+[0m09:48:12.100139 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/waziri99/air-quality-pipeline/dbt/target/semantic_manifest.json
+[0m09:48:12.100619 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 5 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m09:48:12.101185 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 3.2401533, "process_in_blocks": "264448", "process_kernel_time": 0.540519, "process_mem_max_rss": "231792", "process_out_blocks": "3336", "process_user_time": 4.182383}
+[0m09:48:12.101549 [debug] [MainThread]: Command `dbt parse` succeeded at 09:48:12.101464 after 3.24 seconds
+[0m09:48:12.101867 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205ebbb3290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205ebbe7020>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7205cb39b890>]}
+[0m09:48:12.102220 [debug] [MainThread]: Flushing usage events
+[0m09:48:13.422203 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:48:14.883114 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02b140ef0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02bd46870>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02b2e2d80>]}
+
+
+============================== 09:48:14.885306 | 2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb ==============================
+[0m09:48:14.885306 [info ] [MainThread]: Running with dbt=1.11.11
+[0m09:48:14.885766 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'profiles_dir': '/home/waziri99/air-quality-pipeline/dbt', 'introspect': 'True', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'cache_selected_only': 'False', 'no_print': 'None', 'empty': 'None', 'partial_parse': 'True', 'printer_width': '80', 'invocation_command': 'dbt ls', 'fail_fast': 'False', 'log_format': 'default', 'use_experimental_parser': 'False', 'static_parser': 'True', 'target_path': 'None', 'log_path': '/home/waziri99/air-quality-pipeline/dbt/logs', 'log_cache_events': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'version_check': 'True', 'quiet': 'False', 'warn_error': 'None', 'debug': 'False', 'use_colors': 'True'}
+[0m09:48:15.488538 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02ba18320>]}
+[0m09:48:15.550374 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d0143fb6e0>]}
+[0m09:48:15.550965 [info ] [MainThread]: Registered adapter: bigquery=1.11.3
+[0m09:48:15.637770 [debug] [MainThread]: checksum: 30a8cc8fdcbf66701b0944d4ccce3fa46dd04b61e5df68b9f16d57b2e0e3f0be, vars: {}, profile: , target: , version: 1.11.11
+[0m09:48:15.813614 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m09:48:15.813994 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m09:48:15.814281 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m09:48:15.854555 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02bd47530>]}
+[0m09:48:15.949341 [debug] [MainThread]: Wrote artifact WritableManifest to /home/waziri99/air-quality-pipeline/dbt/target/manifest.json
+[0m09:48:15.951331 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/waziri99/air-quality-pipeline/dbt/target/semantic_manifest.json
+[0m09:48:15.970241 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d00f32d460>]}
+[0m09:48:15.970699 [info ] [MainThread]: Found 7 models, 1 seed, 32 data tests, 1 source, 670 macros
+[0m09:48:15.971021 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2e0fc0cf-792a-4f60-af7d-6419d7f4d4eb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d00f891d00>]}
+[0m09:48:15.971889 [info ] [MainThread]: air_quality.marts.dim_dates
+[0m09:48:15.972259 [info ] [MainThread]: air_quality.marts.dim_locations
+[0m09:48:15.972531 [info ] [MainThread]: air_quality.marts.fct_daily_measurements
+[0m09:48:15.972776 [info ] [MainThread]: air_quality.example.my_first_dbt_model
+[0m09:48:15.973019 [info ] [MainThread]: air_quality.example.my_second_dbt_model
+[0m09:48:15.973256 [info ] [MainThread]: air_quality.staging.stg_locations
+[0m09:48:15.973473 [info ] [MainThread]: air_quality.staging.stg_measurements
+[0m09:48:15.973693 [info ] [MainThread]: air_quality.countries
+[0m09:48:15.973905 [info ] [MainThread]: source:air_quality.air_quality_raw.raw_measurements
+[0m09:48:15.974120 [info ] [MainThread]: air_quality.marts.accepted_values_fct_daily_measurements_aqi_category__Good__Moderate__Unhealthy_for_Sensitive_Groups__Unhealthy__Very_Unhealthy__Hazardous__Unknown
+[0m09:48:15.974332 [info ] [MainThread]: air_quality.marts.accepted_values_fct_daily_measurements_country_iso__US__GB__DE__FR__IN__CN__JP__BR__MX__ZA__NG__KE__AU__PK__ID
+[0m09:48:15.974574 [info ] [MainThread]: air_quality.marts.accepted_values_fct_daily_measurements_pollutant__pm25__pm10__no2__o3__co__so2
+[0m09:48:15.974837 [info ] [MainThread]: air_quality.staging.accepted_values_stg_measurements_country_iso__US__GB__DE__FR__IN__CN__JP__BR__MX__ZA__NG__KE__AU__PK__ID
+[0m09:48:15.975094 [info ] [MainThread]: air_quality.staging.accepted_values_stg_measurements_pollutant__pm25__pm10__no2__o3__co__so2
+[0m09:48:15.975305 [info ] [MainThread]: air_quality.marts.not_null_dim_dates_date_id
+[0m09:48:15.975537 [info ] [MainThread]: air_quality.marts.not_null_dim_dates_year
+[0m09:48:15.975791 [info ] [MainThread]: air_quality.marts.not_null_dim_locations_continent
+[0m09:48:15.976043 [info ] [MainThread]: air_quality.marts.not_null_dim_locations_country_iso
+[0m09:48:15.976296 [info ] [MainThread]: air_quality.marts.not_null_dim_locations_location_id
+[0m09:48:15.976553 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_aqi_category
+[0m09:48:15.976813 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_country_iso
+[0m09:48:15.977058 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_measurement_date
+[0m09:48:15.977303 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_measurement_value
+[0m09:48:15.977539 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_pollutant
+[0m09:48:15.977769 [info ] [MainThread]: air_quality.marts.not_null_fct_daily_measurements_surrogate_key
+[0m09:48:15.977997 [info ] [MainThread]: air_quality.example.not_null_my_first_dbt_model_id
+[0m09:48:15.978234 [info ] [MainThread]: air_quality.example.not_null_my_second_dbt_model_id
+[0m09:48:15.978498 [info ] [MainThread]: air_quality.staging.not_null_stg_locations_location_id
+[0m09:48:15.978752 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_country_iso
+[0m09:48:15.978988 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_location_id
+[0m09:48:15.979223 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_measured_at_utc
+[0m09:48:15.979457 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_measurement_date
+[0m09:48:15.979690 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_measurement_value
+[0m09:48:15.979931 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_pollutant
+[0m09:48:15.980171 [info ] [MainThread]: air_quality.staging.not_null_stg_measurements_sensor_id
+[0m09:48:15.980424 [info ] [MainThread]: air_quality.marts.unique_dim_dates_date_id
+[0m09:48:15.980667 [info ] [MainThread]: air_quality.marts.unique_dim_locations_location_id
+[0m09:48:15.980930 [info ] [MainThread]: air_quality.marts.unique_fct_daily_measurements_surrogate_key
+[0m09:48:15.981175 [info ] [MainThread]: air_quality.example.unique_my_first_dbt_model_id
+[0m09:48:15.981419 [info ] [MainThread]: air_quality.example.unique_my_second_dbt_model_id
+[0m09:48:15.981662 [info ] [MainThread]: air_quality.staging.unique_stg_locations_location_id
+[0m09:48:15.982260 [debug] [MainThread]: Resource report: {"command_name": "list", "command_success": true, "command_wall_clock_time": 1.1469555, "process_in_blocks": "1120", "process_kernel_time": 0.155848, "process_mem_max_rss": "222708", "process_out_blocks": "1848", "process_user_time": 2.609346}
+[0m09:48:15.982898 [debug] [MainThread]: Command `dbt ls` succeeded at 09:48:15.982786 after 1.15 seconds
+[0m09:48:15.983268 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02b2b7ef0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d02b2e2d80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74d00fa427e0>]}
+[0m09:48:15.983617 [debug] [MainThread]: Flushing usage events
+[0m09:48:16.903707 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:48:10.098129 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f523d10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f6ee910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f6ee890>]}
+
+
+============================== 15:48:10.132635 | 9b83839d-9935-4e49-a801-ede870b8837f ==============================
+[0m15:48:10.132635 [info ] [MainThread]: Running with dbt=1.8.0
+[0m15:48:10.134409 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': '/opt/airflow/dbt/logs', 'debug': 'False', 'profiles_dir': '/opt/airflow/dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt deps', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m15:48:10.450580 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '9b83839d-9935-4e49-a801-ede870b8837f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f35c050>]}
+[0m15:48:10.527818 [error] [MainThread]: Encountered an error:
+Runtime Error
+  The packages.yml file in this project is malformed. Please double check
+  the contents of this file and fix any errors before retrying.
+  
+  You can find more information on the syntax for this file here:
+  https://docs.getdbt.com/docs/package-management
+  
+  Validator Error:
+  {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1', 'unrendered': {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1'}} is not valid under any of the given schemas
+  
+[0m15:48:10.530486 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_wall_clock_time": 0.500122, "process_user_time": 4.463119, "process_kernel_time": 1.602145, "process_mem_max_rss": "106496", "process_in_blocks": "8", "process_out_blocks": "3904", "command_success": false}
+[0m15:48:10.531523 [debug] [MainThread]: Command `dbt deps` failed at 15:48:10.531355 after 0.50 seconds
+[0m15:48:10.532126 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f362490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c613f392fd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c61432e31d0>]}
+[0m15:48:10.532651 [debug] [MainThread]: Flushing usage events
+[0m16:22:37.501583 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f8894cc10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f88970e90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f8894c610>]}
+
+
+============================== 16:22:37.511253 | 6e509e17-c8af-4590-8766-05642db85742 ==============================
+[0m16:22:37.511253 [info ] [MainThread]: Running with dbt=1.8.0
+[0m16:22:37.515255 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt', 'debug': 'False', 'warn_error': 'None', 'log_path': '/opt/airflow/dbt/logs', 'fail_fast': 'False', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt deps', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m16:22:37.879320 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6e509e17-c8af-4590-8766-05642db85742', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f88972a10>]}
+[0m16:22:37.972953 [error] [MainThread]: Encountered an error:
+Runtime Error
+  The packages.yml file in this project is malformed. Please double check
+  the contents of this file and fix any errors before retrying.
+  
+  You can find more information on the syntax for this file here:
+  https://docs.getdbt.com/docs/package-management
+  
+  Validator Error:
+  {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1', 'unrendered': {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1'}} is not valid under any of the given schemas
+  
+[0m16:22:37.975021 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_wall_clock_time": 0.57721174, "process_user_time": 6.54069, "process_kernel_time": 1.054078, "process_mem_max_rss": "100516", "process_out_blocks": "16", "command_success": false, "process_in_blocks": "0"}
+[0m16:22:37.984032 [debug] [MainThread]: Command `dbt deps` failed at 16:22:37.983609 after 0.59 seconds
+[0m16:22:37.985494 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f8c6c57d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f88990090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x719f88857f50>]}
+[0m16:22:37.986369 [debug] [MainThread]: Flushing usage events
+[0m16:27:49.648681 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2db4d50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2daba90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2db51d0>]}
+
+
+============================== 16:27:49.668193 | 23e62c39-0f07-4b77-beea-945fd59742b5 ==============================
+[0m16:27:49.668193 [info ] [MainThread]: Running with dbt=1.8.0
+[0m16:27:49.673032 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow/dbt', 'version_check': 'True', 'debug': 'False', 'log_path': '/opt/airflow/dbt/logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt deps', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m16:27:50.148716 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '23e62c39-0f07-4b77-beea-945fd59742b5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2c2f390>]}
+[0m16:27:50.220816 [error] [MainThread]: Encountered an error:
+Runtime Error
+  The packages.yml file in this project is malformed. Please double check
+  the contents of this file and fix any errors before retrying.
+  
+  You can find more information on the syntax for this file here:
+  https://docs.getdbt.com/docs/package-management
+  
+  Validator Error:
+  {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1', 'unrendered': {'name': 'dbt_utils', 'package': 'dbt-labs/dbt_utils', 'version': '1.4.1'}} is not valid under any of the given schemas
+  
+[0m16:27:50.223969 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_wall_clock_time": 0.7279438, "process_user_time": 5.964793, "process_kernel_time": 0.970068, "process_mem_max_rss": "100776", "process_out_blocks": "16", "command_success": false, "process_in_blocks": "0"}
+[0m16:27:50.225983 [debug] [MainThread]: Command `dbt deps` failed at 16:27:50.225164 after 0.73 seconds
+[0m16:27:50.229368 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2db6d90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2ca4410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x721cf2caa910>]}
+[0m16:27:50.233147 [debug] [MainThread]: Flushing usage events

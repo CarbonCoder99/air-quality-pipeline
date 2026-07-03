@@ -1,0 +1,30 @@
+# Secrets — never commit these
+.env
+keys/
+*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/.user.yml
+
+# Airflow
+airflow/logs/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
+# OS
+.DS_Store
+Thumbs.db
+terraform/terraform.tfvars

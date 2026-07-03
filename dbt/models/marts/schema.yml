@@ -1,0 +1,73 @@
+version: 2
+
+models:
+
+  - name: dim_locations
+    description: >
+      Monitoring station dimension table. One row per station.
+      Enriched with continent and region from the countries seed.
+
+    columns:
+      - name: location_id
+        tests: [unique, not_null]
+      - name: country_iso
+        tests: [not_null]
+      - name: continent
+        tests: [not_null]
+
+  - name: dim_dates
+    description: >
+      Date dimension covering every day from 2024-01-01 to today.
+      Includes day/month/season attributes for easy time-based analysis.
+
+    columns:
+      - name: date_id
+        tests: [unique, not_null]
+      - name: year
+        tests: [not_null]
+
+  - name: fct_daily_measurements
+    description: >
+      Central fact table. One row per sensor per day per pollutant.
+      Partitioned by measurement_date, clustered by country_iso and pollutant.
+      Includes AQI categories and rolling averages.
+
+    columns:
+
+      - name: surrogate_key
+        description: MD5 hash of sensor_id + measurement_date + pollutant
+        tests:
+          - unique
+          - not_null
+
+      - name: measurement_date
+        tests: [not_null]
+
+      - name: country_iso
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['US','GB','DE','FR','IN','CN','JP',
+                       'BR','MX','ZA','NG','KE','AU','PK','ID']
+
+      - name: pollutant
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pm25','pm10','no2','o3','co','so2']
+
+      - name: measurement_value
+        tests: [not_null]
+
+      - name: aqi_category
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'Good'
+                - 'Moderate'
+                - 'Unhealthy for Sensitive Groups'
+                - 'Unhealthy'
+                - 'Very Unhealthy'
+                - 'Hazardous'
+                - 'Unknown'

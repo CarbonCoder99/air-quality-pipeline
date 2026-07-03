@@ -1,0 +1,13 @@
+# Airflow providers
+apache-airflow-providers-google==10.17.0
+
+# GCP libraries
+google-cloud-bigquery==3.17.0
+google-cloud-storage==2.14.0
+
+# dbt
+dbt-bigquery==1.8.0
+dbt-core==1.8.0
+
+# HTTP requests (for OpenAQ API calls)
+requests==2.31.0

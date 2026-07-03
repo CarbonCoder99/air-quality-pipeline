@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: air_quality_raw
+    description: >
+      Raw air quality measurements loaded directly from GCS by Airflow DAG 2.
+      Data comes from the OpenAQ v3 API. No transformations have been applied.
+      This is the single source of truth — never modify data in this dataset.
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: air_quality_raw
+
+    tables:
+      - name: raw_measurements
+        description: >
+          One row per sensor per day per country.
+          Loaded as NDJSON from GCS. Schema auto-detected by BigQuery.
+          Partitioned by data_date, clustered by country_iso and pollutant.
+
+        columns:
+          - name: sensor_id
+            description: Unique sensor ID from OpenAQ
+          - name: location_id
+            description: Unique location (monitoring station) ID from OpenAQ
+          - name: location_name
+            description: Human-readable station name
+          - name: country_iso
+            description: ISO 3166-1 alpha-2 country code e.g. NG, US, GB
+          - name: country_name
+            description: Full country name
+          - name: pollutant
+            description: Pollutant measured e.g. pm25, no2, o3
+          - name: units
+            description: Unit of measurement e.g. μg/m³, ppb
+          - name: value
+            description: Daily average measurement value
+          - name: datetime_utc
+            description: Measurement datetime in UTC (ISO 8601 string)
+          - name: datetime_local
+            description: Measurement datetime in local timezone
+          - name: value_min
+            description: Minimum reading within the day
+          - name: value_max
+            description: Maximum reading within the day
+          - name: latitude
+            description: Station latitude (can be null)
+          - name: longitude
+            description: Station longitude (can be null)
+          - name: timezone
+            description: Station timezone e.g. Africa/Lagos
+          - name: ingested_at
+            description: UTC timestamp when Airflow loaded this record
+          - name: data_date
+            description: The calendar date this measurement represents
