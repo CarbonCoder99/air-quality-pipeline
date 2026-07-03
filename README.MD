@@ -54,13 +54,64 @@ air_quality_mart.dim_dates               ← full date spine
 
 | Layer | Tool | Purpose |
 |---|---|---|
-| Infrastructure | Terraform | Provision GCS bucket + BigQuery datasets |
+| Infrastructure | Terraform | Provision GCS bucket and BigQuery datasets |
 | Orchestration | Apache Airflow 2.9 (CeleryExecutor) | Schedule and monitor pipeline |
 | Data Lake | Google Cloud Storage | Raw NDJSON landing zone |
-| Data Warehouse | Google BigQuery | Partitioned + clustered tables |
+| Data Warehouse | Google BigQuery | Partitioned and clustered tables |
 | Transformation | dbt-bigquery 1.8 | Staging models, mart models, tests |
 | Containerisation | Docker + Docker Compose | Reproducible local environment |
 | Language | Python 3.11 | Ingestion scripts and DAGs |
+
+---
+
+## Project Structure
+
+    air-quality-pipeline/
+    │
+    ├── terraform/
+    │   ├── main.tf                     # GCS bucket + BigQuery datasets
+    │   ├── variables.tf                # Input variables
+    │   └── outputs.tf                  # Output values after apply
+    │
+    ├── airflow/
+    │   ├── dags/
+    │   │   ├── ingest_openaq.py        # DAG 1: OpenAQ API → GCS
+    │   │   └── load_and_transform.py   # DAG 2: GCS → BigQuery → dbt
+    │   ├── utils/
+    │   │   ├── openaq_client.py        # OpenAQ API wrapper with retry logic
+    │   │   └── bigquery_client.py      # BigQuery load utilities
+    │   └── requirements.txt            # Python dependencies for Airflow image
+    │
+    ├── dbt/
+    │   ├── models/
+    │   │   ├── staging/
+    │   │   │   ├── sources.yml         # Raw BigQuery source definitions
+    │   │   │   ├── schema.yml          # Staging model tests
+    │   │   │   ├── stg_measurements.sql
+    │   │   │   └── stg_locations.sql
+    │   │   └── marts/
+    │   │       ├── schema.yml          # Mart model tests
+    │   │       ├── fct_daily_measurements.sql
+    │   │       ├── dim_locations.sql
+    │   │       └── dim_dates.sql
+    │   ├── macros/
+    │   │   └── aqi_category.sql        # EPA AQI breakpoints macro
+    │   ├── seeds/
+    │   │   └── countries.csv           # Country metadata with continents
+    │   ├── dbt_project.yml
+    │   ├── packages.yml
+    │   └── profiles.yml
+    │
+    ├── exploration/
+    │   ├── explore_openaq.py           # API discovery script (not part of pipeline)
+    │   └── API_FINDINGS.md             # Documented API findings before build
+    │
+    ├── keys/                           # GCP service account key (gitignored)
+    ├── Dockerfile                      # Custom Airflow image with dbt + GCP libs
+    ├── docker-compose.yml              # Full stack: Airflow + Postgres + Redis
+    ├── Makefile                        # Developer shortcut commands
+    ├── .env.example                    # Environment variable template
+    └── .gitignore
 
 ---
 
@@ -71,20 +122,20 @@ air_quality_mart.dim_dates               ← full date spine
 | Country | Continent | Notes |
 |---|---|---|
 | United States | North America | Dense sensor network |
-| United Kingdom | Europe | Urban + rural mix |
-| Germany | Europe | Industrial + residential |
+| United Kingdom | Europe | Urban and rural mix |
+| Germany | Europe | Industrial and residential |
 | France | Europe | |
 | India | Asia | High pollution, many sensors |
 | China | Asia | Industrial context |
 | Japan | Asia | High data quality |
-| Brazil | South America | Urban + forest fire smoke |
+| Brazil | South America | Urban and forest fire smoke |
 | Mexico | North America | Urban pollution |
-| South Africa | Africa | Mining + industrial |
+| South Africa | Africa | Mining and industrial |
 | Nigeria | Africa | West Africa representation |
 | Kenya | Africa | East Africa representation |
 | Australia | Oceania | Bushfire smoke context |
 | Pakistan | Asia | Historically poor air quality |
-| Indonesia | Southeast Asia | Forest fires + urban |
+| Indonesia | Southeast Asia | Forest fires and urban pollution |
 
 **6 core pollutants tracked:**
 PM2.5 · PM10 · NO2 · O3 · CO · SO2
@@ -94,28 +145,31 @@ PM2.5 · PM10 · NO2 · O3 · CO · SO2
 ## dbt Models
 
 ### Staging Layer (views)
+
 | Model | Description |
 |---|---|
-| `stg_measurements` | Cleaned raw measurements — nulls removed, negatives filtered, types cast |
-| `stg_locations` | Deduplicated monitoring stations |
+| stg_measurements | Cleaned raw measurements — nulls removed, negatives filtered, types cast |
+| stg_locations | Deduplicated monitoring stations |
 
 ### Mart Layer (incremental tables)
+
 | Model | Description |
 |---|---|
-| `fct_daily_measurements` | One row per sensor per day. Includes AQI category + 7-day rolling average |
-| `dim_locations` | Station dimension enriched with continent and region |
-| `dim_dates` | Full date spine from 2024-01-01 to today |
+| fct_daily_measurements | One row per sensor per day. Includes AQI category and 7-day rolling average |
+| dim_locations | Station dimension enriched with continent and region from seed |
+| dim_dates | Full date spine from 2024-01-01 to today with season attributes |
 
 ### dbt Features Demonstrated
-- ✅ Incremental models with late-arriving data handling
-- ✅ Partitioning by `measurement_date` (query cost optimisation)
-- ✅ Clustering by `country_iso` + `pollutant` (scan optimisation)
-- ✅ Custom macro (`aqi_category`) based on US EPA breakpoints
-- ✅ `dbt_utils.generate_surrogate_key` for unique row identification
-- ✅ `dbt_utils.date_spine` for complete date dimension
-- ✅ Schema tests: `unique`, `not_null`, `accepted_values`
-- ✅ Source freshness definitions
-- ✅ Seed file for country metadata
+
+- Incremental models with late-arriving data handling (3-day lookback window)
+- Partitioning by measurement_date for query cost optimisation
+- Clustering by country_iso and pollutant for scan optimisation
+- Custom macro (aqi_category) based on US EPA AQI breakpoints
+- dbt_utils.generate_surrogate_key for unique row identification
+- dbt_utils.date_spine for complete date dimension
+- Schema tests: unique, not_null, accepted_values
+- Source definitions with column-level documentation
+- Seed file for static country metadata
 
 ---
 
@@ -124,127 +178,110 @@ PM2.5 · PM10 · NO2 · O3 · CO · SO2
 **Why GCS before BigQuery?**
 Raw files in GCS act as an immutable archive. If our parsing logic in dbt
 ever changes, we can reprocess from the raw files without re-calling the API.
-This is the medallion architecture pattern.
+This is the medallion architecture pattern: raw → staging → mart.
 
 **Why Hive-partitioned paths in GCS?**
-`measurements/date=2024-11-01/country=US/data.json` — the `date=` and
-`country=` prefixes are recognised by BigQuery as virtual partition columns,
-making bulk loads from GCS more efficient.
+The path pattern measurements/date=2024-11-01/country=US/data.json uses
+Hive-style partitioning. BigQuery recognises these prefixes as virtual
+partition columns, making bulk loads from GCS more efficient.
 
 **Why incremental dbt models?**
 We add new data every day. Reprocessing all historical data daily would be
-wasteful and expensive. Incremental models only process new partitions,
-keeping BigQuery costs low and run times fast.
+wasteful and expensive in BigQuery. Incremental models only process new
+partitions, keeping costs low and run times fast.
 
 **Why CeleryExecutor in Airflow?**
-The scheduler and workers are separate processes — the scheduler queues tasks,
-workers execute them. This mirrors how Airflow runs in production on Cloud
-Composer or MWAA, making this setup more realistic than LocalExecutor.
+The scheduler and workers are separate processes. This mirrors how Airflow
+runs in production on Cloud Composer or MWAA, making this setup more
+realistic than LocalExecutor.
 
 **Why two DAGs instead of one?**
-Separating ingestion from transformation isolates failures. If the OpenAQ API
-goes down, only DAG 1 fails — DAG 2 detects this via ExternalTaskSensor and
-skips gracefully. BigQuery data stays consistent.
+Separating ingestion from transformation isolates failures. If the OpenAQ
+API goes down, only DAG 1 fails. DAG 2 detects this via ExternalTaskSensor
+and skips gracefully. BigQuery data stays consistent.
 
----
-
-## Project Structure
-
-air-quality-pipeline/
-├── terraform/              # GCP infrastructure as code
-│   ├── main.tf             # GCS bucket + BigQuery datasets
-│   ├── variables.tf
-│   └── outputs.tf
-├── airflow/
-│   ├── dags/
-│   │   ├── ingest_openaq.py        # DAG 1: API → GCS
-│   │   └── load_and_transform.py   # DAG 2: GCS → BQ → dbt
-│   └── utils/
-│       ├── openaq_client.py        # OpenAQ API wrapper
-│       └── bigquery_client.py      # BigQuery load utilities
-├── dbt/
-│   ├── models/
-│   │   ├── staging/        # stg_measurements, stg_locations
-│   │   └── marts/          # fct_daily_measurements, dim_*
-│   ├── macros/
-│   │   └── aqi_category.sql  # EPA AQI breakpoints macro
-│   └── seeds/
-│       └── countries.csv     # Country metadata with continents
-├── exploration/
-│   └── explore_openaq.py   # API discovery script (not part of pipeline)
-├── Dockerfile              # Custom Airflow image with dbt + GCP
-├── docker-compose.yml      # Full stack: Airflow + Postgres + Redis
-└── Makefile                # Shortcut commands
+**Why explore before building?**
+Before writing any pipeline code, we ran an API exploration script
+(exploration/explore_openaq.py) to understand the exact data structure,
+identify sparse data countries, and discover that the API requires numeric
+country IDs — not ISO string codes. Every pipeline design decision traces
+back to that exploration.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-- Docker + Docker Compose
+
+- Docker and Docker Compose
 - GCP account with billing enabled
-- OpenAQ API key (free at explore.openaq.org)
+- OpenAQ API key (free at explore.openaq.org/register)
 - Terraform
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/YOUR_USERNAME/air-quality-pipeline.git
-cd air-quality-pipeline
-```
+### 1. Clone the repository
 
-### 2. Configure environment
-```bash
-cp .env.example .env
-# Fill in: GCP_PROJECT_ID, GCS_BUCKET_NAME, OPENAQ_API_KEY
-# Generate Fernet key:
-python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-```
+    git clone https://github.com/YOUR_USERNAME/air-quality-pipeline.git
+    cd air-quality-pipeline
 
-### 3. Add GCP service account key
-```bash
-mkdir keys/
-# Place your service account JSON at: keys/gcp-service-account.json
-```
+### 2. Configure environment variables
+
+    cp .env.example .env
+
+Open .env and fill in:
+
+    GCP_PROJECT_ID=your-gcp-project-id
+    GCS_BUCKET_NAME=your-gcp-project-id-air-quality-raw
+    OPENAQ_API_KEY=your-openaq-api-key
+    AIRFLOW__CORE__FERNET_KEY=   # generate below
+    AIRFLOW__WEBSERVER__SECRET_KEY=any-random-string
+
+Generate a Fernet key:
+
+    python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+
+### 3. Add your GCP service account key
+
+    mkdir keys/
+    # Place your service account JSON at: keys/gcp-service-account.json
 
 ### 4. Provision GCP infrastructure
-```bash
-cd terraform/
-terraform init
-terraform apply -var="project_id=YOUR_PROJECT_ID"
-```
 
-### 5. Start the pipeline
-```bash
-make setup    # builds image, initialises DB, starts all services
-```
+    cd terraform/
+    terraform init
+    terraform apply -var="project_id=YOUR_PROJECT_ID"
+    cd ..
 
-### 6. Open Airflow UI
+### 5. Build and start the pipeline
 
-http://localhost:8090
-Username: admin
-Password: admin
+    make setup
 
+This builds the custom Docker image, initialises the Airflow database,
+and starts all services.
 
-### 7. Trigger a run
-```bash
-# Trigger ingestion for a specific date
-docker compose exec airflow-scheduler bash -c "
-  airflow dags trigger ingest_openaq \
-    --exec-date '2024-11-01T00:00:00+00:00'
-"
-```
+### 6. Open the Airflow UI
 
-### Useful commands
-```bash
-make up               # start all services
-make down             # stop all services
-make logs             # tail all logs
-make logs-worker      # tail worker logs only
-make shell            # shell into worker container
-make dbt-run          # run dbt models manually
-make dbt-test         # run dbt tests manually
-make status           # check container health
-```
+    http://localhost:8090
+
+    Username: admin
+    Password: admin
+
+### 7. Trigger a pipeline run
+
+    docker compose exec airflow-scheduler bash -c "
+      airflow dags trigger ingest_openaq \
+        --exec-date '2024-11-01T00:00:00+00:00'
+    "
+
+### Useful Makefile commands
+
+    make up                # start all services
+    make down              # stop all services
+    make logs              # tail all logs
+    make logs-worker       # tail worker logs only
+    make shell             # open shell inside worker container
+    make dbt-run           # run dbt models manually
+    make dbt-test          # run dbt tests manually
+    make status            # check container health
 
 ---
 
@@ -252,38 +289,42 @@ make status           # check container health
 
 | Concept | Implementation |
 |---|---|
-| Infrastructure as Code | Terraform provisions all GCP resources |
-| Workflow Orchestration | Airflow with CeleryExecutor, sensors, XCom |
-| Data Lake Design | GCS with Hive-partitioned paths |
-| Warehouse Optimisation | BigQuery partitioning + clustering |
-| Data Modelling | Star schema with fact + dimension tables |
-| Incremental Processing | dbt incremental models with late data handling |
-| Data Quality | dbt tests, null/negative filtering, outlier removal |
-| Reusable Logic | dbt macros for AQI categorisation |
-| Containerisation | Docker Compose with multi-service orchestration |
-| Secret Management | Environment variables, never hardcoded |
-| Separation of Concerns | Ingestion DAG separate from transformation DAG |
-| Defensive Programming | Empty API responses handled gracefully |
+| Infrastructure as Code | Terraform provisions all GCP resources reproducibly |
+| Workflow Orchestration | Airflow with CeleryExecutor, ExternalTaskSensor, XCom |
+| Data Lake Design | GCS with Hive-partitioned paths per date and country |
+| Warehouse Optimisation | BigQuery partitioning by date, clustering by country and pollutant |
+| Data Modelling | Star schema: one fact table, two dimension tables |
+| Incremental Processing | dbt incremental models with 3-day late data lookback |
+| Data Quality | dbt schema tests, null filtering, negative value removal |
+| Reusable SQL Logic | dbt macro for EPA AQI category classification |
+| Containerisation | Docker Compose orchestrating 6 services |
+| Secret Management | Environment variables injected at runtime, never hardcoded |
+| Separation of Concerns | Ingestion DAG fully decoupled from transformation DAG |
+| Defensive Programming | Empty API responses handled without pipeline failure |
+| Data Discovery | API explored and documented before any pipeline code written |
 
 ---
 
-## Next Steps (Roadmap)
+## Roadmap
 
-- [ ] Add Looker Studio dashboard connected to `air_quality_mart`
-- [ ] Add streaming ingestion with Pub/Sub for near-real-time data
-- [ ] Add dbt snapshots for slowly changing dimension on locations
-- [ ] Deploy Airflow to Cloud Composer for fully managed orchestration
-- [ ] Add Great Expectations for advanced data quality checks
-- [ ] Add CI/CD pipeline with GitHub Actions for dbt model testing
+- Add Looker Studio dashboard connected to air_quality_mart
+- Add streaming ingestion with Pub/Sub for near-real-time updates
+- Add dbt snapshots for slowly changing dimension tracking on locations
+- Deploy Airflow to Cloud Composer for fully managed orchestration
+- Add CI/CD pipeline with GitHub Actions to run dbt tests on every push
+- Extend coverage to 50 countries
 
 ---
 
 ## Course Context
 
-Built as a capstone project while completing the
-[DataTalks.Club Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp),
-covering modules 1-4: containerisation, workflow orchestration,
-data warehousing, and analytics engineering.
+Built as a portfolio project while completing the
+DataTalks.Club Data Engineering Zoomcamp, covering:
+
+- Module 1: Containerisation with Docker
+- Module 2: Workflow orchestration with Airflow
+- Module 3: Data warehousing with BigQuery
+- Module 4: Analytics engineering with dbt
 
 ---
 
