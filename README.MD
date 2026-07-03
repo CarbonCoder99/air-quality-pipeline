@@ -24,29 +24,29 @@ power dashboards, reports, and public health research.
 ## Architecture
 
 OpenAQ API v3
-│
-│  Airflow DAG 1 — daily 06:00 UTC
-▼
+      │
+      │  Airflow DAG 1 — daily 06:00 UTC
+      ▼
 GCS Data Lake
-measurements/date=YYYY-MM-DD/country=XX/data.json
-│
-│  Airflow DAG 2 — daily 08:00 UTC
-▼
+  measurements/date=YYYY-MM-DD/country=XX/data.json
+      │
+      │  Airflow DAG 2 — daily 08:00 UTC
+      ▼
 BigQuery Raw Layer
-air_quality_raw.raw_measurements
-│
-│  dbt — staging models
-▼
+  air_quality_raw.raw_measurements
+      │
+      │  dbt — staging models
+      ▼
 BigQuery Staging Layer
-air_quality_staging.stg_measurements
-air_quality_staging.stg_locations
-│
-│  dbt — mart models
-▼
+  air_quality_staging.stg_measurements
+  air_quality_staging.stg_locations
+      │
+      │  dbt — mart models
+      ▼
 BigQuery Mart Layer
-air_quality_mart.fct_daily_measurements  ← incremental, partitioned, clustered
-air_quality_mart.dim_locations           ← enriched with continent + region
-air_quality_mart.dim_dates               ← full date spine
+  air_quality_mart.fct_daily_measurements  ← incremental, partitioned, clustered
+  air_quality_mart.dim_locations           ← enriched with continent + region
+  air_quality_mart.dim_dates               ← full date spine
 
 ---
 
