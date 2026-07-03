@@ -342,7 +342,7 @@ with DAG(
     default_args       = default_args,
     start_date         = datetime(2026, 6, 25),
     schedule  = "0 6 * * *",   # 6AM UTC daily
-    catchup            = False,           # enables backfilling
+    catchup            = True,           # enables backfilling
     max_active_runs    = 3,              # max 3 days backfilling in parallel
     tags               = ["air-quality", "ingestion", "openaq"],
 ) as dag:
